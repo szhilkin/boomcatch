@@ -51,7 +51,7 @@ function map (prefix, data, referer, userAgent, userIpAddress) {
     result = '';
 
     if (referer) {
-        refererPrefix = getRefererPrefix(url.parse(referer, userIpAddress));
+        refererPrefix = getRefererPrefix(url.parse(referer), userIpAddress);
     } else {
         refererPrefix = '';
     }
