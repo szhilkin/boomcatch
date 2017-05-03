@@ -50,8 +50,7 @@ function map (prefix, data, referer, userAgent, remoteAddress) {
 
     result = '';
 
-    log.info('sending ' + remoteAddress);
-    
+  
     if (referer) {
         refererPrefix = getRefererPrefix(url.parse(referer), remoteAddress);
     } else {
