@@ -45,13 +45,15 @@ function normalisePrefix (prefix) {
     return '';
 }
 
-function map (prefix, data, referer, userAgent, userIpAddress) {
+function map (prefix, data, referer, userAgent, remoteAddress) {
     var result, refererPrefix, suffix;
 
     result = '';
 
+    log.info('sending ' + remoteAddress);
+    
     if (referer) {
-        refererPrefix = getRefererPrefix(url.parse(referer), userIpAddress);
+        refererPrefix = getRefererPrefix(url.parse(referer), remoteAddress);
     } else {
         refererPrefix = '';
     }
@@ -71,10 +73,10 @@ function map (prefix, data, referer, userAgent, userIpAddress) {
     return result;
 }
 
-function getRefererPrefix (referer, userIpAddress) {
+function getRefererPrefix (referer, remoteAddress) {
     // HACK: This function and the functions it calls are brittle and error-prone.
     // TODO: Consider alternative methods for deriving this information, e.g. document metadata.
-    return userIpAddress + '.' + getRefererEnvironment(referer.host) + '.' + getRefererProject(referer.pathname) + '.';
+    return remoteAddress + '.' + getRefererEnvironment(referer.host) + '.' + getRefererProject(referer.pathname) + '.';
 }
 
 function getRefererEnvironment (domain) {
